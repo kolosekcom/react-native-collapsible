@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, TouchableHighlight, FlatList } from 'react-native';
+import { FlatList, TouchableHighlight, View } from 'react-native';
+
 import Collapsible from './Collapsible';
 
 const COLLAPSIBLE_PROPS = [
@@ -62,7 +63,7 @@ export default class Accordion extends Component {
       renderSectionTitle,
     } = this.props;
     return (
-      <View key={key} style={sectionContainerStyle}>
+      <View key={key} style={sectionContainerStyle(section, key)}>
         {renderSectionTitle(section, key, activeSections.includes(key))}
 
         {expandFromBottom && renderCollapsible(section, key)}
@@ -136,7 +137,7 @@ export default class Accordion extends Component {
           style={containerStyle}
           data={sections}
           extraData={activeSections}
-          nestedScrollEnabled={true}
+          nestedScrollEnabled
           keyExtractor={keyExtractor}
           renderItem={({ item, index }) => {
             const section = item;
